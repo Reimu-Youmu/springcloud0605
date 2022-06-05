@@ -12,6 +12,10 @@ public class CommonResult<T> {
     private String message;
     private T data;
 
+    private void Test (){
+        System.out.println("test git push");
+    }
+
     public CommonResult(Integer code, String message) {
         this(code, message, null);
     }
