@@ -6,6 +6,6 @@ package com.atguigu.springcloud.entities;
  */
 public class GitTest0605 {
     public static void main(String[] args) {
-        System.out.println("test git push0605");
+        System.out.println("test git push06051111");
     }
 }
