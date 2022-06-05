@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.atguigu.springcloud.dao.UserDetailDao">
+    <resultMap type="com.atguigu.springcloud.entity.UserDetail" id="UserDetail">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="trueName" jdbcType="VARCHAR" property="trueName"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="locked" jdbcType="INTEGER" property="locked"/>
+    </resultMap>
+
+    <resultMap type="java.lang.Integer" id="total">
+        <result column="total"/>
+    </resultMap>
+
+    <!-- 这个地方的resultMap中的内容会变红，不过不影响程序正常启动 -->
+    <select id="queryUserDetailsList" resultMap="UserDetail, total">
+        SELECT SQL_CALC_FOUND_ROWS
+                   id,
+               nickName,
+               password,
+               trueName,
+               phone,
+               locked
+        FROM
+            auth_user
+        WHERE
+            locked != 1
+--     LIMIT 1, 4;
+LIMIT #{offset}, #{pageSize};
+--         SELECT FOUND_ROWS() as total;
+        SELECT count(id) as total from auth_user;
+    </select>
+
+
+</mapper>
+
